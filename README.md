@@ -6,6 +6,7 @@ Components:
 - `server` - HTTP servlet that receives the temperature readings
 - `storage-api` - OSGi bundle that exposes API for storing temperature readings
 - `storage-rrd4j` - OSGi bundle that implements the storage API via RRD4j
+- `launcher` - Feature launcher that allows execution of the whole application
 
 
 ## Protocol
