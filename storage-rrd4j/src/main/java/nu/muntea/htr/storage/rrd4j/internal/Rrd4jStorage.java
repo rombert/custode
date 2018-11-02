@@ -31,6 +31,12 @@ public class Rrd4jStorage implements Storage {
         
         this.factory = factory;
 
+        // TODO - step should be configurable (system-wide)
+        // TODO - define more entires, and make configurable, e.g.
+        // - x-step (1 second?) average for the last day
+        // - y-step (1 minute?) average for the last month
+        // - z-step (5 minutes?) average for the last 3 months?
+        // others?
         rrdDef = new RrdDef(rrdPath, 1);
         rrdDef.addArchive(AVERAGE, 0.5, 1, 3600); // 1 second step * 3600 rows → records data for one hour
         for ( String dataSource : dataSources )
@@ -61,6 +67,8 @@ public class Rrd4jStorage implements Storage {
     @Override
     public void renderGraph(Instant from, Instant to, OutputStream out) {
         
+        // TODO - add a 'renderinghints' request class to contain width/height request
+        // TODO - add a outputmedata class to allow passing back size, content type
         RrdGraphDef gDef = new RrdGraphDef();
         gDef.setTimeSpan(from.getEpochSecond(), to.getEpochSecond());
         gDef.setWidth(500);
