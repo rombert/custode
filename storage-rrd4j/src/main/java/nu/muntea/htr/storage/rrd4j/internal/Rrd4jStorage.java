@@ -32,7 +32,7 @@ public class Rrd4jStorage implements Storage {
         this.factory = factory;
 
         rrdDef = new RrdDef(rrdPath, 1);
-        rrdDef.addArchive(AVERAGE, 0.5, 1, 10);
+        rrdDef.addArchive(AVERAGE, 0.5, 1, 3600); // 1 second step * 3600 rows → records data for one hour
         for ( String dataSource : dataSources )
             rrdDef.addDatasource(dataSource, DsType.GAUGE, 2 * rrdDef.getStep(), Double.NaN, Double.NaN);
         
@@ -82,7 +82,8 @@ public class Rrd4jStorage implements Storage {
         }
     }
     
-    public RrdDef getDef() {
+    // visible for testing only
+    RrdDef getDef() {
         return rrdDef;
     }
 
