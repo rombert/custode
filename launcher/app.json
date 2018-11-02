@@ -1,0 +1,34 @@
+{
+  "id": "nu.muntea:nu.muntea.htr:slingfeature:application:1.0.0",
+  "bundles": [
+    {
+      "id": "org.rrd4j:rrd4j:3.4-SNAPSHOT",
+      "start-level": "2"
+    },
+    {
+      "id": "nu.muntea.htr:nu.muntea.htr.storage-rrd4j:0.0.1-SNAPSHOT",
+      "start-level": "2"
+    },
+    {
+      "id": "org.apache.felix:org.apache.felix.gogo.jline:1.1.0",
+      "start-level": "1"
+    },
+    {
+	  "id": "org.jline:jline:3.7.0",
+      "start-level": "1"
+    },
+    {
+	  "id": "org.fusesource.jansi:jansi:1.17.1",
+      "start-level": "1"
+    },
+    {
+      "id": "org.apache.felix:org.apache.felix.gogo.runtime:1.1.0",
+      "start-level": "1"
+    },
+    {
+      "id": "org.apache.felix:org.apache.felix.gogo.command:1.0.2",
+      "start-level": "1"
+    }
+  ]
+}
+
