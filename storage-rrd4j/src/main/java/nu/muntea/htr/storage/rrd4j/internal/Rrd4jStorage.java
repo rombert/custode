@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.time.Instant;
 
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.rrd4j.DsType;
 import org.rrd4j.core.RrdBackendFactory;
 import org.rrd4j.core.RrdDb;
@@ -15,6 +18,7 @@ import org.rrd4j.core.Sample;
 import org.rrd4j.graph.RrdGraph;
 import org.rrd4j.graph.RrdGraphDef;
 
+@Component(service = Storage.class)
 public class Rrd4jStorage implements Storage {
     
     private final RrdBackendFactory factory;
@@ -22,7 +26,8 @@ public class Rrd4jStorage implements Storage {
     private String[] dataSources = new String[] { "cpu_temp" }; // TODO - configurable
     private RrdDef rrdDef;
 
-    public Rrd4jStorage(/* @Reference */ RrdBackendFactory factory) {
+    @Activate
+    public Rrd4jStorage(@Reference RrdBackendFactory factory) {
         
         this.factory = factory;
 
@@ -31,6 +36,7 @@ public class Rrd4jStorage implements Storage {
         for ( String dataSource : dataSources )
             rrdDef.addDatasource(dataSource, DsType.GAUGE, 2 * rrdDef.getStep(), Double.NaN, Double.NaN);
         
+        // TODO - don't overwrite if exists
         // initialise with no data
         try {
             new RrdDb(rrdDef, factory).close();
