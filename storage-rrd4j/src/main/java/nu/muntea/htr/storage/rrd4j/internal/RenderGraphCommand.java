@@ -26,12 +26,11 @@ public class RenderGraphCommand {
         this.storage = storage;
     }
     
-    public void render() throws FileNotFoundException, IOException {
-        // TODO - parameters for output file, start and end
+    public void render(int minutes) throws FileNotFoundException, IOException {
         try ( FileOutputStream fos = new FileOutputStream("target/temps.png")) {
-            storage.renderGraph(Instant.now().minus(5, ChronoUnit.MINUTES), Instant.now(), fos);
+            storage.renderGraph(Instant.now().minus(minutes, ChronoUnit.MINUTES), Instant.now(), fos);
         }
         
-        System.out.println("Graph for last 5 minutes written to target/temps.png");
+        System.out.println("Graph for last " + minutes + " minutes written to target/temps.png");
     }
 }
