@@ -14,6 +14,8 @@ import org.rrd4j.core.FetchRequest;
 import org.rrd4j.core.RrdBackendFactory;
 import org.rrd4j.core.RrdDb;
 
+import nu.muntea.htr.storage.api.Measurement;
+
 public class Rrd4jStorageTest {
 
     @Test

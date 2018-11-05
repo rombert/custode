@@ -18,6 +18,8 @@ import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
+import nu.muntea.htr.storage.api.TemperatureReader;
+
 @Component(service = TemperatureReader.class, 
     configurationPolicy = ConfigurationPolicy.REQUIRE)
 @Designate(ocd = SensorsCpuTemperatureReader.Config.class)

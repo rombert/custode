@@ -9,6 +9,8 @@ import java.lang.annotation.Annotation;
 
 import org.junit.jupiter.api.Test;
 
+import nu.muntea.htr.storage.api.TemperatureReader;
+
 public class SensorsCpuTemperatureReaderTest {
     
     @Test

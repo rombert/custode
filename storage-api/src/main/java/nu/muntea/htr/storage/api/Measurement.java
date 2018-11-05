@@ -1,4 +1,4 @@
-package nu.muntea.htr.storage.rrd4j.internal;
+package nu.muntea.htr.storage.api;
 
 public final class Measurement {
 

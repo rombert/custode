@@ -10,6 +10,8 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import nu.muntea.htr.storage.api.Storage;
+
 // mostly useful for debugging
 @Component( property = {
         "osgi.command.scope=htr",

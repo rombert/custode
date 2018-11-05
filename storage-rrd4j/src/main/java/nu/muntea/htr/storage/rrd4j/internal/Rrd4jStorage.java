@@ -18,6 +18,9 @@ import org.rrd4j.core.Sample;
 import org.rrd4j.graph.RrdGraph;
 import org.rrd4j.graph.RrdGraphDef;
 
+import nu.muntea.htr.storage.api.Measurement;
+import nu.muntea.htr.storage.api.Storage;
+
 @Component(service = Storage.class)
 public class Rrd4jStorage implements Storage {
     
