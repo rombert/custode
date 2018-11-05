@@ -29,4 +29,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>Home Temperature Reader - Storage API</name>
 </project>

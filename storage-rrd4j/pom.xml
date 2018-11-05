@@ -97,4 +97,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>Home Temperature Reader - RRD4J Implementation</name>
 </project>

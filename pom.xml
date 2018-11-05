@@ -12,4 +12,5 @@
         <module>storage-api</module>
         <module>storage-rrd4j</module>
     </modules>
+    <name>Home Temperature Reader</name>
 </project>
