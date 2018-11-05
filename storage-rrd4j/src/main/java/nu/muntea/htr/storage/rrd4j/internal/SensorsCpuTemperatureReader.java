@@ -11,13 +11,31 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ConfigurationPolicy;
+import org.osgi.service.metatype.annotations.AttributeDefinition;
+import org.osgi.service.metatype.annotations.Designate;
+import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
-@Component(service = TemperatureReader.class)
+@Component(service = TemperatureReader.class, 
+    configurationPolicy = ConfigurationPolicy.REQUIRE)
+@Designate(ocd = SensorsCpuTemperatureReader.Config.class)
 public class SensorsCpuTemperatureReader implements TemperatureReader {
+   
+    @ObjectClassDefinition
+    public @interface Config {
+        
+        @AttributeDefinition
+        String sensors_json_path();
+    }
+
+    private final String path;
     
-    // TODO - should be configurable
-    private final String path = "coretemp-isa-0000/Package id 0/temp1_input";
+    @Activate
+    public SensorsCpuTemperatureReader(Config cfg) {
+        path = cfg.sensors_json_path();
+    }
 
     @Override
     public long readTemperature() throws IOException, InterruptedException {
