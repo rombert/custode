@@ -77,6 +77,8 @@ public class Rrd4jStorage implements Storage {
         // TODO - add a 'renderinghints' request class to contain width/height request
         // TODO - add a outputmedata class to allow passing back size, content type
         RrdGraphDef gDef = new RrdGraphDef();
+        gDef.setAntiAliasing(true);
+        gDef.setTextAntiAliasing(true);
         gDef.setTimeSpan(from.getEpochSecond(), to.getEpochSecond());
         gDef.setWidth(500);
         gDef.setHeight(300);
