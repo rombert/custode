@@ -4,6 +4,7 @@ import static java.time.Instant.now;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -34,7 +35,18 @@ public class GraphServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        resp.setContentType("image/png");
-        storage.renderGraph(now().minus(5, MINUTES), now(), resp.getOutputStream());
+        String minutes = Optional
+            .ofNullable(req.getParameter("minutesAgo"))
+            .orElse("5");
+        
+        try {
+            long minutesAgo = Long.parseLong(minutes);
+            resp.setContentType("image/png");
+            storage.renderGraph(now().minus(minutesAgo, MINUTES), now(), resp.getOutputStream());
+        } catch ( NumberFormatException e ) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.setContentType("text/plain");
+            resp.getWriter().write("Invalid numeric value " + minutes);
+        }
     }
 }
