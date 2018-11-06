@@ -55,4 +55,4 @@ fi
 
 # run
 echo "--- LAUNCHING APPLICATION ---"
-java -Dlogback.configurationFile=logback.xml -jar ${launcher_jar} -f ${feature_files}
+java -Dlogback.configurationFile=logback.xml -jar ${launcher_jar} -f ${feature_files} -D org.osgi.service.http.port=8101
