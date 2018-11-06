@@ -5,6 +5,8 @@ import static org.rrd4j.ConsolFun.AVERAGE;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Instant;
 
 import org.osgi.service.component.annotations.Activate;
@@ -45,8 +47,10 @@ public class Rrd4jStorage implements Storage {
         for ( String dataSource : dataSources )
             rrdDef.addDatasource(dataSource, DsType.GAUGE, 2 * rrdDef.getStep(), Double.NaN, Double.NaN);
         
-        // TODO - don't overwrite if exists
-        // initialise with no data
+        if ( Files.exists(Paths.get(rrdPath)) )
+            return;
+
+        // initialise with no data if needed
         try {
             new RrdDb(rrdDef, factory).close();
         } catch (IOException e) {
