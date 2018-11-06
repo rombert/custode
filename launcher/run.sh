@@ -15,4 +15,4 @@ fi
 
 # run
 echo "--- LAUNCHING APPLICATION ---"
-rm -rf launcher target/*  && java -jar ${launcher_jar} -f app.json,config-w541.json
+rm -rf launcher target/*  && java -Dlogback.configurationFile=logback.xml -jar ${launcher_jar} -f app.json,config-w541.json
