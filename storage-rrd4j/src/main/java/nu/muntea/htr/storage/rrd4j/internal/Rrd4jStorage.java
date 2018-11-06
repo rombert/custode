@@ -81,6 +81,7 @@ public class Rrd4jStorage implements Storage {
         gDef.setWidth(500);
         gDef.setHeight(300);
         gDef.setFilename("-");
+        gDef.setUnitsExponent(0); // prevent scaling
         gDef.setTitle("Temperature");
         gDef.setVerticalLabel("Degrees Celsius");
         for ( String dataSource: dataSources ) {

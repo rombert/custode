@@ -25,7 +25,7 @@ public class TemperatureRecorder {
         Runnable run = () -> {
             for ( ;; ) {
                 try {
-                    storage.store(Instant.now(), new Measurement("cpu_temp", reader.readTemperature()));
+                    storage.store(Instant.now(), new Measurement("cpu_temp", reader.readTemperature() * 100));
                     Thread.sleep(TIME_BETWEEN_READINGS);
                 } catch (IOException e) {
                     throw new RuntimeException("Failed reading temperature data", e);
