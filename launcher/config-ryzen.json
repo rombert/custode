@@ -1,0 +1,8 @@
+{
+  "id": "nu.muntea:nu.muntea.htr:slingfeature:config-ryzen:1.0.0",
+  "configurations": {
+  	"nu.muntea.htr.storage.rrd4j.internal.SensorsCpuTemperatureReader" : {
+  		"sensors.json.path": "k10temp-pci-00c3/Tdie/temp1_input"
+  	}
+  }
+}
