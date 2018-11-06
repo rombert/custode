@@ -5,24 +5,28 @@ launcher_jar=${HOME}/.m2/repository/org/apache/sling/org.apache.sling.feature.la
 
 rebuild="0"
 clean="0"
+feature_files="app.json"
 
 usage() {
     echo "HTR dev launcher"
     echo ""
-    echo "Usage: $0 [-c] [-r] [-h]"
+	echo "Usage: $0 [-a first.json,second.json] [-c] [-r] [-h]"
     echo ""
+	echo "  -a      Additional feature files"
     echo "  -c      Clean the application workspace"
     echo "  -r      Rebuild the Maven project"
     echo "  -u      Show usage information"
     echo ""
 }
 
-while getopts rch option
+while getopts rcha: option
 do
   case "${option}" in
     r) rebuild="1"
       ;;
     c) clean="1"
+      ;;
+	a) feature_files="${feature_files},${OPTARG}"
       ;;
     h)
       usage
@@ -51,4 +55,4 @@ fi
 
 # run
 echo "--- LAUNCHING APPLICATION ---"
-java -Dlogback.configurationFile=logback.xml -jar ${launcher_jar} -f app.json,config-w541.json
+java -Dlogback.configurationFile=logback.xml -jar ${launcher_jar} -f ${feature_files}

@@ -1,0 +1,25 @@
+{
+  "id": "nu.muntea:nu.muntea.htr:slingfeature:shell:1.0.0",
+  "bundles": [
+    {
+      "id": "org.apache.felix:org.apache.felix.gogo.jline:1.1.0",
+      "start-level": "2"
+    },
+    {
+	  "id": "org.jline:jline:3.7.0",
+      "start-level": "2"
+    },
+    {
+	  "id": "org.fusesource.jansi:jansi:1.17.1",
+      "start-level": "2"
+    },
+    {
+      "id": "org.apache.felix:org.apache.felix.gogo.runtime:1.1.0",
+      "start-level": "2"
+    },
+    {
+      "id": "org.apache.felix:org.apache.felix.gogo.command:1.0.2",
+      "start-level": "2"
+    }  
+  ]
+}
