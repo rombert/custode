@@ -66,6 +66,10 @@
       "start-level": "1"
     },
     {
+      "id": "nu.muntea.htr:nu.muntea.htr.log:0.0.1-SNAPSHOT",
+      "start-level": "1"
+    },
+    {
       "id": "org.apache.felix:org.apache.felix.logback:1.0.0",
       "start-level": "1"
     },
