@@ -31,3 +31,23 @@ to use, _e.g._:
 The application status can then be queries using `systemd` commands:
 
     $ systemctl --user status htr
+
+## Accessing the graphs
+
+### Gogo shell
+
+If the _shell.json_ feature is included, a gogo command can be used to write a
+PNG image of the recorded temperatures.
+
+    g! htr:render 20
+
+The above command writes a PNG with the last 20 minutes of recorded temperatures.
+
+### HTTP endpoint
+
+An HTTP service is started on port 8080 and exposes a graph endpoint at /graph.png .
+By default it exposes the last 5 minutes of graphs. The interval can be tweaked
+by the _minutesAgo_ parameter. For example:
+
+* http://localhost:8080/graph.png - displays data for the last 5 minutes
+* http://localhost:8080/graph.png?minutesAgo=60 - displays data for the last hour
