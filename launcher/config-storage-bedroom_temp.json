@@ -1,0 +1,9 @@
+{
+  "id": "nu.muntea:nu.muntea.htr:slingfeature:config-storage-cpu_temp:1.0.0",
+  "configurations": {
+  	"nu.muntea.htr.storage.rrd4j.internal.Rrd4jStorage~cpu_temp" : {
+  		"dataSourceNames": ["cpu_temp"],
+  		"location": "target/cpu_temp.rrd"
+  	}
+  }
+}
