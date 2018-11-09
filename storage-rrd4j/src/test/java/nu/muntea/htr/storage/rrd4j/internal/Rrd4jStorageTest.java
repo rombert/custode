@@ -101,5 +101,10 @@ public class Rrd4jStorageTest {
             return "target/cpu_temp.rrd";
         }
         
+        @Override
+        public int stepSize() {
+            return 1;
+        }
+        
     }
 }

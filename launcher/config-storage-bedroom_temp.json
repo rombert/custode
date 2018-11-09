@@ -3,7 +3,8 @@
   "configurations": {
   	"nu.muntea.htr.storage.rrd4j.internal.Rrd4jStorage~cpu_temp" : {
   		"dataSourceNames": ["cpu_temp"],
-  		"location": "target/cpu_temp.rrd"
+  		"location": "target/cpu_temp.rrd",
+  		"stepSize": 1
   	}
   }
 }

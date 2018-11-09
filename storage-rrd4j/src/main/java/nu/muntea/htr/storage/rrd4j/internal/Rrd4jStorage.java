@@ -39,6 +39,9 @@ public class Rrd4jStorage implements Storage {
         
         @AttributeDefinition(name = "Location on filesystem")
         String location();
+        
+        @AttributeDefinition(name = "Step size in seconds")
+        int stepSize();
     }
 
     private final RrdBackendFactory factory;
@@ -59,7 +62,7 @@ public class Rrd4jStorage implements Storage {
         // - y-step (1 minute?) average for the last month
         // - z-step (5 minutes?) average for the last 3 months?
         // others?
-        rrdDef = new RrdDef(rrdPath, 1);
+        rrdDef = new RrdDef(rrdPath, cfg.stepSize());
         rrdDef.addArchive(AVERAGE, 0.5, 1, 3600); // 1 second step * 3600 rows → records data for an hour
         rrdDef.addArchive(AVERAGE, 0.5, 10, 2160); // 10 second step * 2160 rows → records data for 6 hours
         rrdDef.addArchive(AVERAGE, 0.5, 60, 1440); // 60 second step * 1440 rows → records data for 1 day

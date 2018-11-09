@@ -3,7 +3,8 @@
   "configurations": {
   	"nu.muntea.htr.storage.rrd4j.internal.Rrd4jStorage~bedroom_temp" : {
   		"dataSourceNames": ["bedroom_temp"],
-  		"location": "target/bedroom_temp.rrd"
+  		"location": "target/bedroom_temp.rrd",
+  		"stepSize": 60
   	}
   }
 }
