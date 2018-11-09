@@ -1,0 +1,13 @@
+[Unit]
+Description=Home Temperature Recorder
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/htr
+User=root # TODO - change to specific user and group
+Type=oneshot
+SuccessExitStatus=143
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

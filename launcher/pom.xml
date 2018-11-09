@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nu.muntea.htr</groupId>
+    <artifactId>nu.muntea.htr.lanuncher</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-rpm</id>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <name>htr</name>
+                    <summary>Home Temperature Recorder</summary>
+                    <group>System/Management</group>
+                    <defaultUsername>root</defaultUsername>
+                    <defaultGroupname>root</defaultGroupname>
+                    <defaultFilemode>0644</defaultFilemode>
+                    <defaultDirmode>0755</defaultDirmode>
+                    <requires>
+                        <require>java >= 1.8</require>
+                    </requires>
+                    <mappings>
+                        <mapping>
+                            <directory>/usr/lib/systemd/system/</directory>
+                            <directoryIncluded>false</directoryIncluded>
+                            <sources>
+                                <source>
+                                    <location>${project.build.outputDirectory}/files/usr/lib/systemd/system/</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                    </mappings>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- TODO: inherit from parent POM after fixing maven-jar-plugin issue -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <name>Home Temperature Reader - Packaging</name>
+</project>
