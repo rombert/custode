@@ -13,8 +13,8 @@
 
 // input data
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0xAC }; // ensure unique value on LAN
-byte server[] = { 192, 168, 0, 12}; // IP address of the HTR server
-int port = 8081; // HTTP port of the HTR server
+byte server[] = { 192, 168, 1, 14}; // IP address of the HTR server
+int port = 8101; // HTTP port of the HTR server
 int pin = 3; // Analog sensor pin
 
 // globals
@@ -47,7 +47,7 @@ void loop() {
 
   if ( client.connect(server, port) ) {
     Serial.println("Connected to server");
-    client.println("POST /measurement?name=bedroom_temp&ts=0&val=" + String(tempToSend) +" HTTP/1.0");
+    client.println("POST /record?source=bedroom_temp&timestamp=-1&temp_celsius=" + String(tempToSend) +" HTTP/1.0");
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.println();    
   } else {
