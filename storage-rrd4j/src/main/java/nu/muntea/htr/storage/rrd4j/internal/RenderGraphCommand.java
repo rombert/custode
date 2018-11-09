@@ -20,7 +20,6 @@ import nu.muntea.htr.storage.api.StorageSelector;
     }, service = RenderGraphCommand.class
 )
 public class RenderGraphCommand {
-
     
     private StorageSelector selector;
     
