@@ -2,6 +2,7 @@ package nu.muntea.htr.http.internal;
 
 import static java.time.Instant.now;
 import static java.time.temporal.ChronoUnit.MINUTES;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.http.whiteboard.propertytypes.HttpWhiteboardServletPattern;
 
 import nu.muntea.htr.storage.api.Storage;
+import nu.muntea.htr.storage.api.StorageSelector;
 
 @Component(service = Servlet.class)
 @HttpWhiteboardServletPattern("/graph.png")
@@ -25,11 +27,11 @@ public class GraphServlet extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
 
-    private final Storage storage;
+    private final StorageSelector selector;
 
     @Activate
-    public GraphServlet(@Reference Storage storage) {
-        this.storage = storage;
+    public GraphServlet(@Reference StorageSelector selector) {
+        this.selector = selector;
     }
     
     @Override
@@ -39,12 +41,28 @@ public class GraphServlet extends HttpServlet {
             .ofNullable(req.getParameter("minutesAgo"))
             .orElse("5");
         
+        String source = req.getParameter("source");
+        if ( source == null || source.isEmpty() ) {
+            resp.setStatus(SC_BAD_REQUEST);
+            resp.setContentType("text/plain");
+            resp.getWriter().write("Required parameter 'source' not found");
+            return;
+        }
+        
+        Optional<Storage> storage = selector.select(source);
+        if ( !storage.isPresent() ) {
+            resp.setStatus(SC_BAD_REQUEST);
+            resp.setContentType("text/plain");
+            resp.getWriter().write("No storage found matching requested source");
+            return;
+        }
+        
         try {
             long minutesAgo = Long.parseLong(minutes);
             resp.setContentType("image/png");
-            storage.renderGraph(now().minus(minutesAgo, MINUTES), now(), resp.getOutputStream());
+            storage.get().renderGraph(now().minus(minutesAgo, MINUTES), now(), resp.getOutputStream());
         } catch ( NumberFormatException e ) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.setStatus(SC_BAD_REQUEST);
             resp.setContentType("text/plain");
             resp.getWriter().write("Invalid numeric value " + minutes);
         }

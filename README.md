@@ -46,8 +46,8 @@ The above command writes a PNG with the last 20 minutes of recorded temperatures
 ### HTTP endpoint
 
 An HTTP service is started on port 8101 and exposes a graph endpoint at /graph.png .
-By default it exposes the last 5 minutes of graphs. The interval can be tweaked
-by the _minutesAgo_ parameter. For example:
+By default it exposes the last 5 minutes of graphs. The _source_ paramter is required.
+Additionally, the interval can be tweaked by the _minutesAgo_ parameter. For example:
 
-* http://localhost:8101/graph.png - displays data for the last 5 minutes
-* http://localhost:8101/graph.png?minutesAgo=60 - displays data for the last hour
+* http://localhost:8101/graph.png?source=cpu_temp - displays data for the last 5 minutes
+* http://localhost:8101/graph.png?source\_cpu\_temp&minutesAgo=60 - displays data for the last hour

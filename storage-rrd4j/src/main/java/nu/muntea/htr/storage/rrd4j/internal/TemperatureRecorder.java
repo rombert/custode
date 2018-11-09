@@ -16,16 +16,20 @@ import nu.muntea.htr.storage.api.TemperatureReader;
 public class TemperatureRecorder {
 
     private static final long TIME_BETWEEN_READINGS = 1000l;  // TODO - configurable
+    private static final String DATASOURCE_NAME = "cpu_temp"; // TODO - configurable
     
     private Thread thread;
 
     @Activate
-    public TemperatureRecorder(@Reference Storage storage, @Reference TemperatureReader reader) {
+    public TemperatureRecorder(
+            @Reference(target="(dataSourceNames="+ DATASOURCE_NAME +")") Storage storage, 
+            @Reference TemperatureReader reader
+    ) {
         
         Runnable run = () -> {
             for ( ;; ) {
                 try {
-                    storage.store(Instant.now(), new Measurement("cpu_temp", reader.readTemperature() * 100));
+                    storage.store(Instant.now(), new Measurement(DATASOURCE_NAME, reader.readTemperature() * 100));
                     Thread.sleep(TIME_BETWEEN_READINGS);
                 } catch (IOException e) {
                     throw new RuntimeException("Failed reading temperature data", e);

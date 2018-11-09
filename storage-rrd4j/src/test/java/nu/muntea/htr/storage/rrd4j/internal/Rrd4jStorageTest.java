@@ -3,6 +3,7 @@ package nu.muntea.htr.storage.rrd4j.internal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
@@ -22,22 +23,22 @@ import nu.muntea.htr.storage.api.Measurement;
 public class Rrd4jStorageTest {
     
     private RrdBackendFactory factory;
+    private final LocalCfg cfg = new LocalCfg();
 
     @BeforeEach
     void prepare() throws IOException {
         factory = RrdBackendFactory.getDefaultFactory();
-        // TODO - should not depend on the default name
-        Files.deleteIfExists(Paths.get("target", "temps.rrd"));
+        Files.deleteIfExists(Paths.get(cfg.location()));
     }
 
     @Test
     void averagesAreCalculated() throws IOException {
-        Rrd4jStorage storage = new Rrd4jStorage(factory);
+        Rrd4jStorage storage = new Rrd4jStorage(factory, cfg);
         Instant start = Instant.now();
         Instant current = start; // make the compiler happy
         for (int i = 0; i < 100; i++) {
             current = start.plus(i, ChronoUnit.SECONDS);
-            storage.store(current, new Measurement("cpu_temp", 20));
+            storage.store(current, new Measurement(cfg.dataSourceNames()[0], 20));
         }
 
         try (RrdDb db = new RrdDb(storage.getDef().getPath(), false)) {
@@ -61,14 +62,14 @@ public class Rrd4jStorageTest {
         Instant current = start; // make the compiler happy
 
         for ( int i = 0 ; i < 2; i++ ) {
-            Rrd4jStorage storage = new Rrd4jStorage(factory);
+            Rrd4jStorage storage = new Rrd4jStorage(factory, cfg);
             for (int j = 0; j < 10; j++) {
                 current = start.plus(i * 10 + j, ChronoUnit.SECONDS);
-                storage.store(current, new Measurement("cpu_temp", 20));
+                storage.store(current, new Measurement(cfg.dataSourceNames()[0], 20));
             }
         }
         
-        Rrd4jStorage storage = new Rrd4jStorage(factory);
+        Rrd4jStorage storage = new Rrd4jStorage(factory, cfg);
         try (RrdDb db = new RrdDb(storage.getDef().getPath(), false)) {
             FetchRequest req = db.createFetchRequest(ConsolFun.AVERAGE, start.getEpochSecond(),
                     current.getEpochSecond());
@@ -81,5 +82,24 @@ public class Rrd4jStorageTest {
             assertEquals(20, totalCount, "Total entries");
             assertEquals(1, nanCount, "NaN entries"); // TODO - why do we still have 1?
         }
+    }
+    
+    static class LocalCfg implements Rrd4jStorage.Config {
+
+        @Override
+        public Class<? extends Annotation> annotationType() {
+            return LocalCfg.class;
+        }
+
+        @Override
+        public String[] dataSourceNames() {
+            return new String[] { "cpu_temp" };
+        }
+
+        @Override
+        public String location() {
+            return "target/cpu_temp.rrd";
+        }
+        
     }
 }

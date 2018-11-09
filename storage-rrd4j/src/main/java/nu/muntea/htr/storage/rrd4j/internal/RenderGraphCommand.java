@@ -11,6 +11,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import nu.muntea.htr.storage.api.Storage;
+import nu.muntea.htr.storage.api.StorageSelector;
 
 // mostly useful for debugging
 @Component( property = {
@@ -21,18 +22,21 @@ import nu.muntea.htr.storage.api.Storage;
 public class RenderGraphCommand {
 
     
-    private Storage storage;
+    private StorageSelector selector;
     
     @Activate
-    public RenderGraphCommand(@Reference Storage storage) {
-        this.storage = storage;
+    public RenderGraphCommand(@Reference StorageSelector selector) {
+        this.selector = selector;
     }
     
-    public void render(int minutes) throws FileNotFoundException, IOException {
-        try ( FileOutputStream fos = new FileOutputStream("target/temps.png")) {
+    public void render(String sourceName, int minutes) throws FileNotFoundException, IOException {
+        
+        Storage storage = selector.select(sourceName).orElseThrow(() -> new RuntimeException("No dataSource with name '" + sourceName + "' found"));
+        
+        try ( FileOutputStream fos = new FileOutputStream("target/" + sourceName + ".png")) {
             storage.renderGraph(Instant.now().minus(minutes, ChronoUnit.MINUTES), Instant.now(), fos);
         }
         
-        System.out.println("Graph for last " + minutes + " minutes written to target/temps.png");
+        System.out.println("Graph for last " + minutes + " minutes and data source " + sourceName + " written to target/" + sourceName + ".png");
     }
 }
