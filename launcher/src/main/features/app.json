@@ -1,5 +1,8 @@
 {
-  "id": "nu.muntea:nu.muntea.htr:slingfeature:application:1.0.0",
+  "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:app:0.0.1-SNAPSHOT",
+  "variables" : {
+    "persistence.dir": "target"
+  },
   "bundles": [
     {
       "id": "org.apache.felix:org.apache.felix.http.servlet-api:1.1.2",

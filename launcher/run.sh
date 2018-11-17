@@ -1,11 +1,11 @@
 #!/bin/sh -e
 
-launcher_ver=0.2.0
+launcher_ver=0.8.0
 launcher_jar=${HOME}/.m2/repository/org/apache/sling/org.apache.sling.feature.launcher/${launcher_ver}/org.apache.sling.feature.launcher-${launcher_ver}.jar
 
 rebuild="0"
 clean="0"
-feature_files="app.json"
+feature_files="src/main/features/app.json"
 
 usage() {
     echo "HTR dev launcher"
@@ -26,7 +26,10 @@ do
       ;;
     c) clean="1"
       ;;
-	a) feature_files="${feature_files},${OPTARG}"
+	a)
+	   for additional_feature_file in $(echo ${OPTARG} | tr ',' ' '); do
+	     feature_files="${feature_files},src/main/features/${additional_feature_file}"
+	   done
       ;;
     h)
       usage
@@ -55,4 +58,10 @@ fi
 
 # run
 echo "--- LAUNCHING APPLICATION ---"
-java -Dlogback.configurationFile=logback.xml -jar ${launcher_jar} -f ${feature_files} -D org.osgi.service.http.port=8101
+HTR_HOME=target \
+WORK_DIR=target \
+HTTP_PORT=8082 \
+ALL_FEATURES=${feature_files} \
+LOGBACK_FILE=logback.xml \
+LAUNCHER_JAR=${launcher_jar} \
+ src/main/resources/files/usr/bin/htr

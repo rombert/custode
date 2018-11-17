@@ -4,10 +4,11 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/htr
-User=root # TODO - change to specific user and group
-Type=oneshot
+User=htr
+Type=simple
 SuccessExitStatus=143
 StandardOutput=syslog
+EnvironmentFile=/etc/sysconfig/htr
 
 [Install]
 WantedBy=multi-user.target

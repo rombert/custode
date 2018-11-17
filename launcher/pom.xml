@@ -3,11 +3,49 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>nu.muntea.htr</groupId>
-    <artifactId>nu.muntea.htr.lanuncher</artifactId>
+    <artifactId>nu.muntea.htr.launcher</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>slingfeature-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>feature-dependencies</id>
+                        <goals>
+                            <goal>repository</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>extra-dependencies</id>
+                        <goals>
+                            <goal>repository</goal>
+                        </goals>
+                        <configuration>
+                            <repositories>
+                                <repository>
+                                    <embedArtifacts>
+                                        <embedArtifact>
+                                            <groupId>org.apache.felix</groupId>
+                                            <artifactId>org.apache.felix.framework</artifactId>
+                                            <version>6.0.1</version>
+                                        </embedArtifact>
+                                        <embedArtifact>
+                                            <groupId>org.apache.sling</groupId>
+                                            <artifactId>org.apache.sling.launchpad.api</artifactId>
+                                            <version>1.2.0</version>
+                                        </embedArtifact>
+                                    </embedArtifacts>
+                                </repository>
+                            </repositories>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>rpm-maven-plugin</artifactId>
@@ -31,17 +69,100 @@
                     <requires>
                         <require>java >= 1.8</require>
                     </requires>
+                    <defineStatements>
+                        <defineStatement>_source_payload w0.gzdio</defineStatement>
+                        <defineStatement>_binary_payload w0.gzdio</defineStatement>
+                    </defineStatements>                    
                     <mappings>
                         <mapping>
-                            <directory>/usr/lib/systemd/system/</directory>
+                            <directory>/usr/lib/systemd/system</directory>
                             <directoryIncluded>false</directoryIncluded>
                             <sources>
                                 <source>
-                                    <location>${project.build.outputDirectory}/files/usr/lib/systemd/system/</location>
+                                    <location>${project.build.outputDirectory}/files/usr/lib/systemd/system</location>
                                 </source>
                             </sources>
                         </mapping>
+                        <mapping>
+                            <directory>/etc/sysconfig</directory>
+                            <directoryIncluded>false</directoryIncluded>
+                            <configuration>noreplace</configuration>
+                            <sources>
+                                <source>
+                                    <location>${project.build.outputDirectory}/files/etc/sysconfig</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/bin</directory>
+                            <directoryIncluded>false</directoryIncluded>
+                            <filemode>0755</filemode>
+                            <sources>
+                                <source>
+                                    <location>${project.build.outputDirectory}/files/usr/bin</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/lib/htr/conf</directory>
+                            <sources>
+                                <source>
+                                    <location>${project.build.outputDirectory}/files/usr/lib/htr/conf</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/lib/htr/launcher</directory>
+                            <dependency>
+                                <includes>
+                                    <include>org.apache.sling:org.apache.sling.feature.launcher</include>
+                                </includes>
+                                <stripVersion>true</stripVersion>
+                            </dependency>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/lib/htr/artifacts</directory>
+                            <sources>
+                                <source>
+                                    <location>${project.build.directory}/artifacts</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/var/lib/htr</directory>
+                            <username>htr</username>
+                            <groupname>htr</groupname>
+                        </mapping>
+                        <mapping>
+                            <directory>/var/lib/htr/storage</directory>
+                            <username>htr</username>
+                            <groupname>htr</groupname>
+                        </mapping>
                     </mappings>
+                    <preinstallScriptlet>
+                        <script>
+                            getent group htr > /dev/null || groupadd -r htr
+                            getent passwd htr > /dev/null || useradd  -r -g htr -s /sbin/nologin -c "HTR daemon" -d /var/lib/htr htr
+                        </script>
+                    </preinstallScriptlet>
+                    <postinstallScriptlet>
+                        <script>
+                            systemctl daemon-reload
+                        </script>
+                    </postinstallScriptlet>
+                    <preremoveScriptlet>
+                        <script>
+                            if [ $1 -eq 0 ] ; then
+                                systemctl stop htr
+                                systemctl disable htr
+                            fi
+                        </script>
+                    </preremoveScriptlet>
+                    <postremoveScriptlet>
+                        <script>
+                            systemctl daemon-reload
+                        </script>
+                    </postremoveScriptlet>
                 </configuration>
             </plugin>
         </plugins>
@@ -51,6 +172,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.feature.launcher</artifactId>
+            <version>0.8.0</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
     
     <name>Home Temperature Reader - Packaging</name>
 </project>

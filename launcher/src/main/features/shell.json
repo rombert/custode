@@ -1,5 +1,5 @@
 {
-  "id": "nu.muntea:nu.muntea.htr:slingfeature:shell:1.0.0",
+  "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:shell:0.0.1-SNAPSHOT",
   "bundles": [
     {
       "id": "org.apache.felix:org.apache.felix.gogo.jline:1.1.0",

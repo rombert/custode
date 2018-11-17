@@ -1,0 +1,18 @@
+<!-- standard appender configuration that:
+    1. Does not include timestamps (journalctl already handles that)
+    2. Silences noisy appenders
+ -->
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>[%t] %level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="info">
+    <appender-ref ref="STDOUT" />
+  </root>
+
+  <logger name="Events.Service" level="warn" />
+  <logger name="Events.Bundle" level="warn" />
+</configuration>
