@@ -4,6 +4,7 @@ Components:
 
 - `client` - Arduino client code that sends temperature readings over HTTP
 - `http` - HTTP endpoint that exposes graphs and accepts temperature readings
+- `sensor-cpu-temp` - OSGi bundle that records CPU temperatures 
 - `storage-api` - OSGi bundle that exposes API for storing temperature readings
 - `storage-rrd4j` - OSGi bundle that implements the storage API via RRD4j
 - `launcher` - Feature launcher that allows execution of the whole application

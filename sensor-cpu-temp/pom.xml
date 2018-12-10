@@ -2,8 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nu.muntea.htr.storage-rrd4j</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>nu.muntea.htr.sensor-cpu-temp</artifactId>
     
     <parent>
         <groupId>nu.muntea.htr</groupId>
@@ -11,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
-
+    
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -33,18 +32,22 @@
             <artifactId>org.osgi.service.metatype.annotations</artifactId>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>nu.muntea.htr.storage-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.rrd4j</groupId>
-            <artifactId>rrd4j</artifactId>
-            <version>3.4-SNAPSHOT</version>
+          <groupId>org.apache.geronimo.specs</groupId>
+          <artifactId>geronimo-json_1.1_spec</artifactId>
+          <version>1.0</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.johnzon</groupId>
+            <artifactId>johnzon-core</artifactId>
+            <version>1.1.10</version>
             <scope>provided</scope>
         </dependency>
 
@@ -75,7 +78,7 @@
     </dependencies>
 
     <build>
-        <plugins>
+        <plugins>      
             <plugin>
                 <groupId>biz.aQute.bnd</groupId>
                 <artifactId>bnd-maven-plugin</artifactId>
@@ -89,5 +92,5 @@
             </plugin>
         </plugins>
     </build>
-    <name>Home Temperature Reader - RRD4J Implementation</name>
+    <name>Home Temperature Reader - CPU Temperature Sensor</name>
 </project>

@@ -54,6 +54,7 @@ fi
 if [ ${clean} = "1" ]; then
     echo "--- CLEANING WORKSPACE ---"
     rm -rf launcher target/*
+    mkdir -p target/storage
 fi
 
 # run

@@ -1,4 +1,4 @@
-package nu.muntea.htr.storage.rrd4j.internal;
+package nu.muntea.htr.sensor.cpu_temp.internal;
 
 import java.io.IOException;
 import java.time.Instant;

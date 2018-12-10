@@ -1,7 +1,7 @@
 {
   "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:config-w541:0.0.1-SNAPSHOT",
   "configurations": {
-  	"nu.muntea.htr.storage.rrd4j.internal.SensorsCpuTemperatureReader" : {
+    "nu.muntea.htr.sensor.cpu_temp.internal.SensorsCpuTemperatureReader" : {
   		"sensors.json.path": "coretemp-isa-0000/Package id 0/temp1_input"
   	}
   }

@@ -29,30 +29,6 @@
       "start-level": "3"
     },
     {
-      "id": "org.apache.geronimo.specs:geronimo-json_1.1_spec:1.1",
-      "start-level": "3"
-    },
-    {
-      "id": "org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:1.1",
-      "start-level": "3"
-    },
-    {
-      "id": "org.ow2.asm:asm:5.0.1",
-      "start-level": "3"
-    },
-    {
-      "id": "org.ow2.asm:asm-commons:5.0.1",
-      "start-level": "3"
-    },
-    {
-      "id": "org.ow2.asm:asm-tree:5.0.1",
-      "start-level": "3"
-    },
-    {
-      "id": "org.apache.johnzon:johnzon-core:1.1.10",
-      "start-level": "3"
-    },
-    {
       "id": "ch.qos.logback:logback-classic:1.2.3",
       "start-level": "1"
     },
