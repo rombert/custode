@@ -1,6 +1,7 @@
 #!/bin/sh -ex
 
 HTR_HOME=${HTR_HOME:-/usr/lib/htr}
+JAVA_OPTS=${JAVA_OPTS:--Xmx92m}
 
 # ALL_FEATURES is an override
 if [ -z ${ALL_FEATURES} ]; then
@@ -19,6 +20,7 @@ LOGBACK_FILE=${LOGBACK_FILE:-${HTR_HOME}/conf/logback.xml}
 LAUNCHER_JAR=${LAUNCHER_JAR:-${HTR_HOME}/launcher/org.apache.sling.feature.launcher.jar}
 
 java \
+	${JAVA_OPTS} \
 	-Dlogback.configurationFile=${LOGBACK_FILE} \
 	-jar ${LAUNCHER_JAR} \
 	-c ${HTR_HOME}/artifacts \
