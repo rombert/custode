@@ -8,7 +8,7 @@ clean="0"
 feature_files="src/main/features/app.json"
 
 usage() {
-    echo "HTR dev launcher"
+    echo "Custode dev launcher"
     echo ""
 	echo "Usage: $0 [-a first.json,second.json] [-c] [-r] [-h]"
     echo ""
@@ -59,10 +59,10 @@ fi
 
 # run
 echo "--- LAUNCHING APPLICATION ---"
-HTR_HOME=target \
+CUSTODE_HOME=target \
 WORK_DIR=target \
 HTTP_PORT=8082 \
 ALL_FEATURES=${feature_files} \
 LOGBACK_FILE=logback.xml \
 LAUNCHER_JAR=${launcher_jar} \
- src/main/resources/files/usr/bin/htr
+ src/main/resources/files/usr/bin/custode

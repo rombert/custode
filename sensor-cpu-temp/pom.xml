@@ -2,11 +2,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nu.muntea.htr.sensor-cpu-temp</artifactId>
+    <artifactId>nu.muntea.custode.sensor-cpu-temp</artifactId>
     
     <parent>
-        <groupId>nu.muntea.htr</groupId>
-        <artifactId>nu.muntea.htr.parent</artifactId>
+        <groupId>nu.muntea.custode</groupId>
+        <artifactId>nu.muntea.custode.parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>nu.muntea.htr.storage-api</artifactId>
+            <artifactId>nu.muntea.custode.storage-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -92,5 +92,5 @@
             </plugin>
         </plugins>
     </build>
-    <name>Home Temperature Reader - CPU Temperature Sensor</name>
+    <name>Custode - CPU Temperature Sensor</name>
 </project>

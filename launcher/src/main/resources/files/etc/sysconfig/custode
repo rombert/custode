@@ -1,0 +1,3 @@
+ADDITIONAL_FEATURE_FILES="config-storage-cpu_temp config-w541"
+HTTP_PORT="8081"
+WORK_DIR="/var/lib/custode"

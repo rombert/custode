@@ -13,8 +13,8 @@
 
 // input data
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0xAC }; // ensure unique value on LAN
-byte server[] = { 192, 168, 1, 100}; // IP address of the HTR server
-int port = 8081; // HTTP port of the HTR server
+byte server[] = { 192, 168, 1, 100}; // IP address of the custode server
+int port = 8081; // HTTP port of the custode server
 int pin = 3; // Analog sensor pin
 
 // globals

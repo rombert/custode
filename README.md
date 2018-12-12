@@ -1,4 +1,4 @@
-# Temperature tracking
+# Custode
 
 Components:
 
@@ -31,7 +31,7 @@ to use, _e.g._:
 
 The application status can then be queries using `systemd` commands:
 
-    $ systemctl --user status htr
+    $ systemctl --user status custode
 
 ## Accessing the graphs
 
@@ -40,7 +40,7 @@ The application status can then be queries using `systemd` commands:
 If the _shell.json_ feature is included, a gogo command can be used to write a
 PNG image of the recorded temperatures.
 
-    g! htr:render 20
+    g! custode:render 20
 
 The above command writes a PNG with the last 20 minutes of recorded temperatures.
 

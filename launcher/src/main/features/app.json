@@ -1,5 +1,5 @@
 {
-  "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:app:0.0.1-SNAPSHOT",
+  "id": "nu.muntea.custode:nu.muntea.custode.launcher:slingfeature:app:0.0.1-SNAPSHOT",
   "variables" : {
     "persistence.dir": "target"
   },
@@ -13,15 +13,15 @@
       "start-level": "5"
     },
     {
-      "id": "nu.muntea.htr:nu.muntea.htr.http:0.0.1-SNAPSHOT",
+      "id": "nu.muntea.custode:nu.muntea.custode.http:0.0.1-SNAPSHOT",
       "start-level": "5"
     },  
     {
-      "id": "nu.muntea.htr:nu.muntea.htr.storage-rrd4j:0.0.1-SNAPSHOT",
+      "id": "nu.muntea.custode:nu.muntea.custode.storage-rrd4j:0.0.1-SNAPSHOT",
       "start-level": "4"
     },  
     {
-      "id": "nu.muntea.htr:nu.muntea.htr.storage-api:0.0.1-SNAPSHOT",
+      "id": "nu.muntea.custode:nu.muntea.custode.storage-api:0.0.1-SNAPSHOT",
       "start-level": "4"
     },  
     {
@@ -45,7 +45,7 @@
       "start-level": "1"
     },
     {
-      "id": "nu.muntea.htr:nu.muntea.htr.log:0.0.1-SNAPSHOT",
+      "id": "nu.muntea.custode:nu.muntea.custode.log:0.0.1-SNAPSHOT",
       "start-level": "1"
     },
     {

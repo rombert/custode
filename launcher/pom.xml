@@ -2,8 +2,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>nu.muntea.htr</groupId>
-    <artifactId>nu.muntea.htr.launcher</artifactId>
+    <groupId>nu.muntea.custode</groupId>
+    <artifactId>nu.muntea.custode.launcher</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <build>
@@ -59,7 +59,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <name>htr</name>
+                    <name>custode</name>
                     <summary>Home Temperature Recorder</summary>
                     <group>System/Management</group>
                     <defaultUsername>root</defaultUsername>
@@ -104,15 +104,15 @@
                             </sources>
                         </mapping>
                         <mapping>
-                            <directory>/usr/lib/htr/conf</directory>
+                            <directory>/usr/lib/custode/conf</directory>
                             <sources>
                                 <source>
-                                    <location>${project.build.outputDirectory}/files/usr/lib/htr/conf</location>
+                                    <location>${project.build.outputDirectory}/files/usr/lib/custode/conf</location>
                                 </source>
                             </sources>
                         </mapping>
                         <mapping>
-                            <directory>/usr/lib/htr/launcher</directory>
+                            <directory>/usr/lib/custode/launcher</directory>
                             <dependency>
                                 <includes>
                                     <include>org.apache.sling:org.apache.sling.feature.launcher</include>
@@ -121,7 +121,7 @@
                             </dependency>
                         </mapping>
                         <mapping>
-                            <directory>/usr/lib/htr/artifacts</directory>
+                            <directory>/usr/lib/custode/artifacts</directory>
                             <sources>
                                 <source>
                                     <location>${project.build.directory}/artifacts</location>
@@ -129,20 +129,20 @@
                             </sources>
                         </mapping>
                         <mapping>
-                            <directory>/var/lib/htr</directory>
-                            <username>htr</username>
-                            <groupname>htr</groupname>
+                            <directory>/var/lib/custode</directory>
+                            <username>custode</username>
+                            <groupname>custode</groupname>
                         </mapping>
                         <mapping>
-                            <directory>/var/lib/htr/storage</directory>
-                            <username>htr</username>
-                            <groupname>htr</groupname>
+                            <directory>/var/lib/custode/storage</directory>
+                            <username>custode</username>
+                            <groupname>custode</groupname>
                         </mapping>
                     </mappings>
                     <preinstallScriptlet>
                         <script>
-                            getent group htr > /dev/null || groupadd -r htr
-                            getent passwd htr > /dev/null || useradd  -r -g htr -s /sbin/nologin -c "HTR daemon" -d /var/lib/htr htr
+                            getent group custode > /dev/null || groupadd -r custode
+                            getent passwd custode > /dev/null || useradd  -r -g custode -s /sbin/nologin -c "Custode daemon" -d /var/lib/custode custode
                         </script>
                     </preinstallScriptlet>
                     <postinstallScriptlet>
@@ -153,8 +153,8 @@
                     <preremoveScriptlet>
                         <script>
                             if [ $1 -eq 0 ] ; then
-                                systemctl stop htr
-                                systemctl disable htr
+                                systemctl stop custode
+                                systemctl disable custode
                             fi
                         </script>
                     </preremoveScriptlet>
@@ -182,5 +182,5 @@
         </dependency>
     </dependencies>
     
-    <name>Home Temperature Reader - Packaging</name>
+    <name>Custode - Packaging</name>
 </project>

@@ -1,0 +1,14 @@
+[Unit]
+Description=Custode
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/custode
+User=custode
+Type=simple
+SuccessExitStatus=143
+StandardOutput=syslog
+EnvironmentFile=/etc/sysconfig/custode
+
+[Install]
+WantedBy=multi-user.target

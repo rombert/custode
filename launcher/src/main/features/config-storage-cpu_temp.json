@@ -1,7 +1,7 @@
 {
-  "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:config-storage-cpu_temp:0.0.1-SNAPSHOT",
+  "id": "nu.muntea.custode:nu.muntea.custode.launcher:slingfeature:config-storage-cpu_temp:0.0.1-SNAPSHOT",
   "configurations": {
-  	"nu.muntea.htr.storage.rrd4j.internal.Rrd4jStorage~cpu_temp" : {
+  	"nu.muntea.custode.storage.rrd4j.internal.Rrd4jStorage~cpu_temp" : {
   		"dataSourceNames": ["cpu_temp"],
     	"location": "${persistence.dir}/cpu_temp.rrd",
   		"stepSize": 1

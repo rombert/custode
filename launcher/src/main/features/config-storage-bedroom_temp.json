@@ -1,7 +1,7 @@
 {
-  "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:config-storage-bedroom_temp:0.0.1-SNAPSHOT",
+  "id": "nu.muntea.custode:nu.muntea.custode.launcher:slingfeature:config-storage-bedroom_temp:0.0.1-SNAPSHOT",
   "configurations": {
-  	"nu.muntea.htr.storage.rrd4j.internal.Rrd4jStorage~bedroom_temp" : {
+  	"nu.muntea.custode.storage.rrd4j.internal.Rrd4jStorage~bedroom_temp" : {
   		"dataSourceNames": ["bedroom_temp"],
   		"location": "${persistence.dir}/bedroom_temp.rrd",
   		"stepSize": 60

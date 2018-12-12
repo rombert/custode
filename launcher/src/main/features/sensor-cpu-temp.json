@@ -1,8 +1,8 @@
 {
-  "id": "nu.muntea.htr:nu.muntea.htr.launcher:slingfeature:storage-rr4j:0.0.1-SNAPSHOT",
+  "id": "nu.muntea.custode:nu.muntea.custode.launcher:slingfeature:storage-rr4j:0.0.1-SNAPSHOT",
   "bundles": [
     {
-      "id": "nu.muntea.htr:nu.muntea.htr.sensor-cpu-temp:0.0.1-SNAPSHOT",
+      "id": "nu.muntea.custode:nu.muntea.custode.sensor-cpu-temp:0.0.1-SNAPSHOT",
       "start-level": "4"
     },
     {
