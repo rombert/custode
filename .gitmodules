@@ -1,3 +1,3 @@
 [submodule "rrd4j"]
 	path = rrd4j
-	url = https://github.com/rrd4j/rrd4j.git
+	url = https://github.com/rombert/rrd4j.git
