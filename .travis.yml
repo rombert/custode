@@ -4,9 +4,10 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
 install: true
 dist: xenial
-script: mvn -V verify
+script: mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
 addons:
   sonarcloud:
     organization: "rombert-github"
