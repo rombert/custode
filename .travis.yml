@@ -6,4 +6,4 @@ cache:
     - $HOME/.m2
 install: true
 dist: xenial
-script: ./mvnw verify
+script: mvn -V verify
