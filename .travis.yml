@@ -5,4 +5,4 @@ cache:
   directories:
     - $HOME/.m2
 install: true
-script: mvn -X -V verify
+script: ./mvnw verify
