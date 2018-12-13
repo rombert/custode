@@ -4,6 +4,12 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
 install: true
 dist: xenial
-script: mvn -V verify
+script: mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
+addons:
+  sonarcloud:
+    organization: "rombert-github"
+    token:
+      secure: "vHD9KrXmurEbJfAi+/LZJcYF+Ns+L16SONUggz61SuV3QNGytOjAHYKc4quPq8fsVJfCj+JbZT5x7I0jKz4tjI7csVk04Tj4zEN6ZsXzuuIR+N55HF4Af3a7KPGHLcUN3+wk3s73+9lu8yAD3dD9hn6S0EOSGSudQaWbCQVw/LX7tL25tKM+dU4auvsHmly37S1OaGbgcQloBGo8PKnoZ1FbXyUQfChNtBotl+mDzneV+FP2zLOvvMFZyDvsFSz8Qjl7CgjO3h3Gm6QLJQhToUXLk+ydS7QGTHN0DjgOdkmQjUkIqFeBf6K1+7whgb65c5T6b+2SaEGH0kx5P36rAj4vtIJBA+N9qgSGiQ9A6DxJlrW/z4k6QXbQZsjl3MYD9npjCk2bgz49w+C8SaohuQPhD5oprlTKOvHEU0tGP8lcoatGTqpQsBqEVIo0YOQYTMPLje9ZD7y7ihvt7RuKOEsFFDIDWvJgvEJlvS3+vJxlStmegyWx7+GC1rMcDz4V0KbPlEdXABS6E9nM+sHqC6t9w+X71c9HpSyhY/UAzlX3HbPd48KC73JU8s3uuxDCHADeI5CTPfhW5hH0mYubk8/K6o+N6KlgrkqOc64jEKJqk5RGe0BeD33xQG9AakJM+KdrQm7r3KQsUL/fIkBvIiT17DnMYAXhgA0fiFXl01c=" 
