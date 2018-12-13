@@ -50,14 +50,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>rpm-maven-plugin</artifactId>
                 <version>2.2.0</version>
-                <executions>
-                    <execution>
-                        <id>generate-rpm</id>
-                        <goals>
-                            <goal>rpm</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <name>custode</name>
                     <summary>Home Temperature Recorder</summary>
@@ -181,6 +173,33 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
+    
+    <profiles>
+        <profile>
+            <id>rpm</id>
+            <activation>
+                <file>
+                    <exists>/usr/bin/rpm</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-rpm</id>
+                                <goals>
+                                    <goal>rpm</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     
     <name>Custode - Packaging</name>
 </project>
