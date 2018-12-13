@@ -7,3 +7,8 @@ cache:
 install: true
 dist: xenial
 script: mvn -V verify
+addons:
+  sonarcloud:
+    organization: "rombert-github"
+    token:
+      secure: "YZ2UyksXs4vtDTKIwkwiqyzxUdfc2TasV4GFSFzShtvuF1lLIERubvQaHxIr4zIn2JjIG7tdTNxwXrC9ZCzmHQcdXFgs44NSeYBmkWzgwgF7V/CCgbJv91GWjVAIpX6/MKz/CckmFCLwTjYNUJ/KGd1GFj2bgy/223UTzf8Tu79QvTHclFydxNSCPpKtK7PCa382odBkvr67Yy0fFxqGQy2lC3LM1i5qzsTJAzA9YyyFi+AJDf8CcjzAx/Lvf4HnZdKoPFbUAghm/Tf6Nj17PHTFH54VDcUSE33YdIBDzZXFn/AbVc448/Cufg4C8T9eGjr1epjcwBokyn6GDD2CiZW4sMMH7V/ct6aP5Q8xWUMqjya9uuTj6oEbb4BDKaWBOP1PxEh8ws0+tkIbivwBJ89D4ZhOD5nfzemqLdKo1fqpw/5cRHxrTXp311HB5LieqPdyV3t6El3byN4Je4vfCeeQz/L685vTe0hzqNe8FyR27qSQyNrldLQPrGgsbEbAxzl9+0VyzFqROWVxJ30FffYVDonJ5DiRweDtyzKGtiNUi8/XbB1PjSmpBE7a7VeVc5673PwdiLs/FKRQW9azLq3sDjpkIX0ngjVuDtxXumVg+sDoyrQHfT5AfuAbvwoysuM0V19DVKQ0pFlHo0UNHpNEdHYyJZgNMjvaF+LcF9s=" 
