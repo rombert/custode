@@ -12,7 +12,6 @@
         <module>storage-api</module>
         <module>storage-rrd4j</module>
         <module>sensor-cpu-temp</module>
-        <module>log</module>
         <module>http</module>
         <module>launcher</module>
     </modules>
