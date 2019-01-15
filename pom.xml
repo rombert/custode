@@ -8,7 +8,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>rrd4j</module>
         <module>parent</module>
         <module>storage-api</module>
         <module>storage-rrd4j</module>

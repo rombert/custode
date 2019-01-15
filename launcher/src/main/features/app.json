@@ -25,7 +25,7 @@
       "start-level": "4"
     },  
     {
-      "id": "org.rrd4j:rrd4j:3.4-SNAPSHOT",
+      "id": "org.rrd4j:rrd4j:3.4",
       "start-level": "3"
     },
     {
