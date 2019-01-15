@@ -45,11 +45,7 @@
       "start-level": "1"
     },
     {
-      "id": "nu.muntea.custode:nu.muntea.custode.log:0.0.1-SNAPSHOT",
-      "start-level": "1"
-    },
-    {
-      "id": "org.apache.felix:org.apache.felix.logback:1.0.0",
+      "id": "org.apache.felix:org.apache.felix.logback:1.0.2",
       "start-level": "1"
     },
     {
