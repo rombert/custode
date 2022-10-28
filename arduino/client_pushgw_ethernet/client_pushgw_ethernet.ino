@@ -14,6 +14,7 @@
 
 
 #include <Ethernet.h>
+#include <DHT.h>
 
 // input data
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0xAC }; // ensure unique value on LAN
@@ -23,6 +24,7 @@ int pin = 3; // Analog sensor pin
 
 // globals
 EthernetClient client;
+DHT dht(pin, DHT22);
 
 void setup() {
   Serial.begin(9600);
@@ -42,21 +44,22 @@ void setup() {
 
   Serial.print("IP address: ");
   Serial.println(Ethernet.localIP());
+
+  dht.begin();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  float temp = readTemperature(pin);
-  String payload ="# TYPE room_temp_celsius gauge\nroom_temp_celsius{room=\"master_bedroom\"} " + String(temp, 2);
-
-  Serial.println("Content-Length: " + String(payload.length() + 1));
-  Serial.println(payload);
-
+  // float temp = readTemperature(pin);
+  float temp = dht.readTemperature();
+  float humidity = dht.readHumidity();
+  Serial.println("Temp: " + String(temp) + " C, humidity: " + String(humidity) + "%");
   /*
    * The ethernet client println command sends a \r\n, which throws off the content-length calculations,
-   * and maybe the posh gateway itself. So manually append a carriage return
+   * and maybe the push gateway itself. So manually append a carriage return
    */
   if ( client.connect(vhost, port) ) {
+    String payload ="# TYPE room_temp_celsius gauge\nroom_temp_celsius{room=\"master_bedroom\"} " + String(temp, 2);
     Serial.println("Connected to server");
     client.println("POST /metrics/job/room_temperature HTTP/1.1");
     client.println("Host: " + String(vhost));
@@ -71,25 +74,10 @@ void loop() {
       char c = client.read();
       Serial.print(c);
     }
+    client.stop();
   } else {
     Serial.println("Connection to server failed");
   }
 
   delay(60000); // we should send values every minute
-}
-
-float readTemperature(int temperaturePin) {
-  float voltage, degreesC, readVal;
-  readVal = analogRead(temperaturePin);
-  voltage = readVal * 5 / 1024;
-  degreesC = (voltage - 0.5) * 100;
-
-  Serial.print(" pin value: ");
-  Serial.print(readVal);
-  Serial.print(" voltage: ");
-  Serial.print(voltage);
-  Serial.print("  deg C: ");
-  Serial.println(degreesC);
-
-  return degreesC;
 }
