@@ -4,12 +4,14 @@
  * Hardware:
  * 
  * - Arduino Uno (5V, GND, Analog X)
- * - LM50 Temperature sensor
+ * - DHT22 Temperature sensor
  * - W5100 Ethernet shield
  * 
  * Software:
  * 
  * - Prometheus Push Gateway
+ * 
+ * See also https://learn.adafruit.com/dht/overview
  */
 
 
