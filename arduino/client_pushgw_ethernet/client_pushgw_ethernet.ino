@@ -23,6 +23,8 @@ byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0xAC }; // ensure unique value on L
 char vhost[] = "prometheus-pushgateway.badkub.es";
 int port = 80; // HTTP port of the prometheus push gw
 int pin = 3; // Analog sensor pin
+int dump_delay_millis = 1000;
+int loop_delay_millis = 60000;  // we should send values every minute
 
 // globals
 EthernetClient client;
@@ -72,7 +74,9 @@ void loop() {
     client.print("\n");
     client.print(payload);
     client.print("\n");
+    client.flush();
     Serial.println("Data sent, dumping response");
+    delay(dump_delay_millis); // need to wait for the response to be available on the client
     while ( client.available() ) {
       char c = client.read();
       Serial.print(c);
@@ -82,5 +86,5 @@ void loop() {
     Serial.println("Connection to server failed");
   }
 
-  delay(60000); // we should send values every minute
+  delay(loop_delay_millis - dump_delay_millis);
 }
