@@ -67,7 +67,11 @@ void loop() {
     client.print("\n");
     client.print(payload);
     client.print("\n");
-    Serial.println("Data sent");
+    Serial.println("Data sent, dumping response");
+    while ( client.available() ) {
+      char c = client.read();
+      Serial.print(c);
+    }
   } else {
     Serial.println("Connection to server failed");
   }
