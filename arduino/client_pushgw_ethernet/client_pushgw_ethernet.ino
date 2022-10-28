@@ -17,8 +17,7 @@
 
 // input data
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0xAC }; // ensure unique value on LAN
-byte server[] = { 10, 25, 0, 66}; // IP address of the prometheus push gw
-String vhost = "push-gateway.badkub.es";
+char vhost[] = "prometheus-pushgateway.badkub.es";
 int port = 80; // HTTP port of the prometheus push gw
 int pin = 3; // Analog sensor pin
 
@@ -57,10 +56,10 @@ void loop() {
    * The ethernet client println command sends a \r\n, which throws off the content-length calculations,
    * and maybe the posh gateway itself. So manually append a carriage return
    */
-  if ( client.connect(server, port) ) {
+  if ( client.connect(vhost, port) ) {
     Serial.println("Connected to server");
     client.println("POST /metrics/job/room_temperature HTTP/1.1");
-    client.println("Host: " + vhost);
+    client.println("Host: " + String(vhost));
     client.println("Content-Length: " + String(payload.length() + 1) );
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.println("Connection: Close");
