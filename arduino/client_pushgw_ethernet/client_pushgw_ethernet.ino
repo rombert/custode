@@ -59,7 +59,8 @@ void loop() {
    * and maybe the push gateway itself. So manually append a carriage return
    */
   if ( client.connect(vhost, port) ) {
-    String payload ="# TYPE room_temp_celsius gauge\nroom_temp_celsius{room=\"living_room\"} " + String(temp, 2);
+    String payload ="# TYPE room_temp_celsius gauge\nroom_temp_celsius{room=\"living_room\"} " + String(temp, 2) + "\n";
+    payload += "# TYPE room_humidity_percentage gauge\nroom_humidity_percentage{room=\"living_room\"} " + String(humidity, 2);
     Serial.println("Connected to server");
     client.println("POST /metrics/job/room_temperature HTTP/1.1");
     client.println("Host: " + String(vhost));
